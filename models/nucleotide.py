@@ -86,12 +86,9 @@ class Nucleotide:
         gc_count = self.sequence.count('G') + self.sequence.count('C')
         at_count = self.sequence.count('A') + self.sequence.count('T') + self.sequence.count('U')
         if any(Nucleotide.ambiguous_nucleotides) in self.sequence:
-            for ambiguity in Nucleotide.ambiguous_nucleotides:
+            for ambiguity, chance in Nucleotide.ambiguous_nucleotides.items():
                 ambiguity_count = self.sequence.count(ambiguity)
-                gc_chance = (
-                    (Nucleotide.ambiguous_nucleotides[ambiguity].count('G')
-                    + Nucleotide.ambiguous_nucleotides[ambiguity].count('C'))
-                    / len(Nucleotide.ambiguous_nucleotides[ambiguity]))
+                gc_chance = (chance.count('G') + chance.count('C')) / len(chance)
                 gc_count += gc_chance * ambiguity_count
                 at_count += ambiguity_count - gc_chance
         percent = round(float(gc_count / (gc_count + at_count) * 100), 2)
