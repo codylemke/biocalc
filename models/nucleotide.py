@@ -42,7 +42,10 @@ class Nucleotide:
             elif 'T' in self.sequence and 'U' not in self.sequence:
                 self.type = 'DNA'
             else:
-                self.type = ''
+                raise AttributeError(
+                    'The `nucleotide_type` could not be determined.'
+                    'Please manually specify the `nucleotide_type` as a keyword argument.'
+                    'eg. DNA or RNA')
         return
 
     @property
@@ -106,8 +109,7 @@ class Nucleotide:
         Return 'True' if the sequence contains an ambigous
         nucleotide character
         """
-        ambigous_nucleotides = ['W','S','M','K','R','Y','B','D','H','V','N']
-        for ambigous_nucleotide in ambigous_nucleotides:
-            if ambigous_nucleotide in self.sequence:
+        for ambiguous_nucleotide in Nucleotide.ambiguous_nucleotides:
+            if ambiguous_nucleotide in self.sequence:
                 return True
         return False
