@@ -1,4 +1,4 @@
-"""Construct
+"""RNA
 
 Description.
 
@@ -8,14 +8,14 @@ Usage Example:
 # Standard Libraries
 import pathlib
 # Local Modules
-from .dna import Nucleotide
+from .nucleotide import Nucleotide
 # Global Constants
 GG_EXPRESS_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 
 # CLASSES ---------------------------------------------------------------------
-class CDS(Nucleotide):
-    """Representation of a construct"""
+class RNA(Nucleotide):
+    """Representation of an RNA molecule"""
 
     def __init__(
         self, sequence, *parts, name='generic_construct',

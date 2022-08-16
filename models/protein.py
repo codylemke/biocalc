@@ -13,8 +13,8 @@ ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 # CLASS -----------------------------------------------------------------------
 class Protein:
-    """Representation of a primer"""
-    
+    """Representation of a protein"""
+
     residue_codes = [
         ['A', 'Ala', 'Alanine'],
         ['R', 'Arg', 'Arginine'],
@@ -38,5 +38,7 @@ class Protein:
         ['V', 'Val', 'Valine']
     ]
     
-    def __init__():
+    def __init__(self, sequence, name='generic_protein'):
+        self.sequence = sequence
+        self.name = name
         return
