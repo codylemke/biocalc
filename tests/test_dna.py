@@ -250,10 +250,10 @@ def golden_gate_assembly_parts_pass_2():
     """Parts for BbsI golden gate assembly"""
     part1 = Fragment(
         name='AghSHC1.1-BsaI',
-        sequence='')
+        sequence='ATCG')
     part2 = Fragment(
         name='AghSHC1.2-BsaI',
-        sequence='')
+        sequence='ATCG')
     vector = Construct(
         name='(pET28-NtHisYTK01)',
         sequence='CCGGTGATGCCGGCCACGATGCGTCCGGCGTAGAGGATCGAGATCTCGATCCCGCGAAATTAATACGACTCACTATAGGGGAATTGTGAGCGGATAACAATTCCCCTCTAGAAATAATTTTGTTTAACTTTAAGAAGGAGATATACCATGGGCAGCAGCCATCATCATCATCATCACAGCAGCGGTATGGGAGACCGAAAGTGAAACGTGATTTCATGCGTCATTTTGAACATTTTGTAAATCTTATTTAATAATGTGTGCGGCAATTCACATTTAATTTATGAATGTTTTCTTAACATCGCGGCAACTCAAGAAACGGCAGGTTCGGATCTTAGCTACTAGAGAAAGAGGAGAAATACTAGATGCGTAAAGGCGAAGAGCTGTTCACTGGTGTCGTCCCTATTCTGGTGGAACTGGATGGTGATGTCAACGGTCATAAGTTTTCCGTGCGTGGCGAGGGTGAAGGTGACGCAACTAATGGTAAACTGACGCTGAAGTTCATCTGTACTACTGGTAAACTGCCGGTTCCTTGGCCGACTCTGGTAACGACGCTGACTTATGGTGTTCAGTGCTTTGCTCGTTATCCGGACCATATGAAGCAGCATGACTTCTTCAAGTCCGCCATGCCGGAAGGCTATGTGCAGGAACGCACGATTTCCTTTAAGGATGACGGCACGTACAAAACGCGTGCGGAAGTGAAATTTGAAGGCGATACCCTGGTAAACCGCATTGAGCTGAAAGGCATTGACTTTAAAGAGGACGGCAATATCCTGGGCCATAAGCTGGAATACAATTTTAACAGCCACAATGTTTACATCACCGCCGATAAACAAAAAAATGGCATTAAAGCGAATTTTAAAATTCGCCACAACGTGGAGGATGGCAGCGTGCAGCTGGCTGATCACTACCAGCAAAACACTCCAATCGGTGATGGTCCTGTTCTGCTGCCAGACAATCACTATCTGAGCACGCAAAGCGTTCTGTCTAAAGATCCGAACGAGAAACGCGATCATATGGTTCTGCTGGAGTTCGTAACCGCAGCGGGCATCACGCATGGTATGGATGAACTGTACAAATGACCAGGCATCAAATAAAACGAAAGGCTCAGTCGAAAGACTGGGCCTTTCGTTTTATCTGTTGTTTGTCGGTGAACGCTCTCTACTAGAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATAGGTCTCTAGCGGCTGAGCAATAACTAGCATAACCCCTTGGGGCCTCTAAACGGGTCTTGAGGGGTTTTTTGCTGAAAGGAGGAACTATATCCGGATTGGCGAATGGGACGCGCCCTGTAGCGGCGCATTAAGCGCGGCGGGTGTGGTGGTTACGCGCAGCGTGACCGCTACACTTGCCAGCGCCCTAGCGCCCGCTCCTTTCGCTTTCTTCCCTTCCTTTCTCGCCACGTTCGCCGGCTTTCCCCGTCAAGCTCTAAATCGGGGGCTCCCTTTAGGGTTCCGATTTAGTGCTTTACGGCACCTCGACCCCAAAAAACTTGATTAGGGTGATGGTTCACGTAGTGGGCCATCGCCCTGATAGACGGTTTTTCGCCCTTTGACGTTGGAGTCCACGTTCTTTAATAGTGGACTCTTGTTCCAAACTGGAACAACACTCAACCCTATCTCGGTCTATTCTTTTGATTTATAAGGGATTTTGCCGATTTCGGCCTATTGGTTAAAAAATGAGCTGATTTAACAAAAATTTAACGCGAATTTTAACAAAATATTAACGTTTACAATTTCAGGTGGCACTTTTCGGGGAAATGTGCGCGGAACCCCTATTTGTTTATTTTTCTAAATACATTCAAATATGTATCCGCTCATGAATTAATTCTTAGAAAAACTCATCGAGCATCAAATGAAACTGCAATTTATTCATATCAGGATTATCAATACCATATTTTTGAAAAAGCCGTTTCTGTAATGAAGGAGAAAACTCACCGAGGCAGTTCCATAGGATGGCAAGATCCTGGTATCGGTCTGCGATTCCGACTCGTCCAACATCAATACAACCTATTAATTTCCCCTCGTCAAAAATAAGGTTATCAAGTGAGAAATCACCATGAGTGACGACTGAATCCGGTGAGAATGGCAAAAGTTTATGCATTTCTTTCCAGACTTGTTCAACAGGCCAGCCATTACGCTCGTCATCAAAATCACTCGCATCAACCAAACCGTTATTCATTCGTGATTGCGCCTGAGCGAGACGAAATACGCGATCGCTGTTAAAAGGACAATTACAAACAGGAATCGAATGCAACCGGCGCAGGAACACTGCCAGCGCATCAACAATATTTTCACCTGAATCAGGATATTCTTCTAATACCTGGAATGCTGTTTTCCCGGGGATCGCAGTGGTGAGTAACCATGCATCATCAGGAGTACGGATAAAATGCTTGATGGTCGGAAGAGGCATAAATTCCGTCAGCCAGTTTAGTCTGACCATCTCATCTGTAACATCATTGGCAACGCTACCTTTGCCATGTTTCAGAAACAACTCTGGCGCATCGGGCTTCCCATACAATCGATAGATTGTCGCACCTGATTGCCCGACATTATCGCGAGCCCATTTATACCCATATAAATCAGCATCCATGTTGGAATTTAATCGCGGCCTAGAGCAAGACGTTTCCCGTTGAATATGGCTCATAACACCCCTTGTATTACTGTTTATGTAAGCAGACAGTTTTATTGTTCATGACCAAAATCCCTTAACGTGAGTTTTCGTTCCACTGAGCGTCAGACCCCGTAGAAAAGATCAAAGGATCTTCTTGAGATCCTTTTTTTCTGCGCGTAATCTGCTGCTTGCAAACAAAAAAACCACCGCTACCAGCGGTGGTTTGTTTGCCGGATCAAGAGCTACCAACTCTTTTTCCGAAGGTAACTGGCTTCAGCAGAGCGCAGATACCAAATACTGTCCTTCTAGTGTAGCCGTAGTTAGGCCACCACTTCAAGAACTCTGTAGCACCGCCTACATACCTCGCTCTGCTAATCCTGTTACCAGTGGCTGCTGCCAGTGGCGATAAGTCGTGTCTTACCGGGTTGGACTCAAGACGATAGTTACCGGATAAGGCGCAGCGGTCGGGCTGAACGGGGGGTTCGTGCACACAGCCCAGCTTGGAGCGAACGACCTACACCGAACTGAGATACCTACAGCGTGAGCTATGAGAAAGCGCCACGCTTCCCGAAGGGAGAAAGGCGGACAGGTATCCGGTAAGCGGCAGGGTCGGAACAGGAGAGCGCACGAGGGAGCTTCCAGGGGGAAACGCCTGGTATCTTTATAGTCCTGTCGGGTTTCGCCACCTCTGACTTGAGCGTCGATTTTTGTGATGCTCGTCAGGGGGGCGGAGCCTATGGAAAAACGCCAGCAACGCGGCCTTTTTACGGTTCCTGGCCTTTTGCTGGCCTTTTGCTCACATGTTCTTTCCTGCGTTATCCCCTGATTCTGTGGATAACCGTATTACCGCCTTTGAGTGAGCTGATACCGCTCGCCGCAGCCGAACGACCGAGCGCAGCGAGTCAGTGAGCGAGGAAGCGGAAGAGCGCCTGATGCGGTATTTTCTCCTTACGCATCTGTGCGGTATTTCACACCGCATATATGGTGCACTCTCAGTACAATCTGCTCTGATGCCGCATAGTTAAGCCAGTATACACTCCGCTATCGCTACGTGACTGGGTCATGGCTGCGCCCCGACACCCGCCAACACCCGCTGACGCGCCCTGACGGGCTTGTCTGCTCCCGGCATCCGCTTACAGACAAGCTGTGACCGTCTCCGGGAGCTGCATGTGTCAGAGGTTTTCACCGTCATCACCGAAACGCGCGAGGCAGCTGCGGTAAAGCTCATCAGCGTGGTCGTGAAGCGATTCACAGATGTCTGCCTGTTCATCCGCGTCCAGCTCGTTGAGTTTCTCCAGAAGCGTTAATGTCTGGCTTCTGATAAAGCGGGCCATGTTAAGGGCGGTTTTTTCCTGTTTGGTCACTGATGCCTCCGTGTAAGGGGGATTTCTGTTCATGGGGGTAATGATACCGATGAAACGAGAGAGGATGCTCACGATACGGGTTACTGATGATGAACATGCCCGGTTACTGGAACGTTGTGAGGGTAAACAACTGGCGGTATGGATGCGGCGGGACCAGAGAAAAATCACTCAGGGTCAATGCCAGCGCTTCGTTAATACAGATGTAGGTGTTCCACAGGGTAGCCAGCAGCATCCTGCGATGCAGATCCGGAACATAATGGTGCAGGGCGCTGACTTCCGCGTTTCCAGACTTTACGAAACACGGAAACCGAAGACCATTCATGTTGTTGCTCAGGTCGCAGACGTTTTGCAGCAGCAGTCGCTTCACGTTCGCTCGCGTATCGGTGATTCATTCTGCTAACCAGTAAGGCAACCCCGCCAGCCTAGCCGGGTCCTCAACGACAGGAGCACGATCATGCGCACCCGTGGGGCCGCCATGCCGGCGATAATGGCCTGCTTCTCGCCGAAACGTTTGGTGGCGGGACCAGTGACGAAGGCTTGAGCGAGGGCGTGCAAGATTCCGAATACCGCAAGCGACAGGCCGATCATCGTCGCGCTCCAGCGAAAGCGGTCCTCGCCGAAAATGACCCAGAGCGCTGCCGGCACCTGTCCTACGAGTTGCATGATAAAGAAGACAGTCATAAGTGCGGCGACGATAGTCATGCCCCGCGCCCACCGGAAGGAGCTGACTGGGTTGAAGGCTCTCAAGGGCATCGGTCGAGATCCCGGTGCCTAATGAGTGAGCTAACTTACATTAATTGCGTTGCGCTCACTGCCCGCTTTCCAGTCGGGAAACCTGTCGTGCCAGCTGCATTAATGAATCGGCCAACGCGCGGGGAGAGGCGGTTTGCGTATTGGGCGCCAGGGTGGTTTTTCTTTTCACCAGTGAGACGGGCAACAGCTGATTGCCCTTCACCGCCTGGCCCTGAGAGAGTTGCAGCAAGCGGTCCACGCTGGTTTGCCCCAGCAGGCGAAAATCCTGTTTGATGGTGGTTAACGGCGGGATATAACATGAGCTGTCTTCGGTATCGTCGTATCCCACTACCGAGATATCCGCACCAACGCGCAGCCCGGACTCGGTAATGGCGCGCATTGCGCCCAGCGCCATCTGATCGTTGGCAACCAGCATCGCAGTGGGAACGATGCCCTCATTCAGCATTTGCATGGTTTGTTGAAAACCGGACATGGCACTCCAGTCGCCTTCCCGTTCCGCTATCGGCTGAATTTGATTGCGAGTGAGATATTTATGCCAGCCAGCCAGACGCAGACGCGCCGAGACAGAACTTAATGGGCCCGCTAACAGCGCGATTTGCTGGTGACCCAATGCGACCAGATGCTCCACGCCCAGTCGCGTACCGTCTTCATGGGAGAAAATAATACTGTTGATGGGTGTCTGGTCAGAGACATCAAGAAATAACGCCGGAACATTAGTGCAGGCAGCTTCCACAGCAATGGCATCCTGGTCATCCAGCGGATAGTTAATGATCAGCCCACTGACGCGTTGCGCGAGAAGATTGTGCACCGCCGCTTTACAGGCTTCGACGCCGCTTCGTTCTACCATCGACACCACCACGCTGGCACCCAGTTGATCGGCGCGAGATTTAATCGCCGCGACAATTTGCGACGGCGCGTGCAGGGCCAGACTGGAGGTGGCAACGCCAATCAGCAACGACTGTTTGCCCGCCAGTTGTTGTGCCACGCGGTTGGGAATGTAATTCAGCTCCGCCATCGCCGCTTCCACTTTTTCCCGCGTTTTCGCAGAAACGTGGCTGGCCTGGTTCACCACGCGGGAAACGGTCTGATAAGAGACACCGGCATACTCTGCGACATCGTATAACGTTACTGGTTTCACATTCACCACCCTGAATTGACTCTCTTCCGGGCGCTATCATGCCATACCGCGAAAGGTTTTGCGCCATTCGATGGTGTCCGGGATCTCGACGCTCTCCCTTATGCGACTCCTGCATTAGGAAGCAGCCCAGTAGTAGGTTGAGGCCGTTGAGCACCGCCGCCGCAAGGAATGGTGCATGCAAGGAGATGGCGCCCAACAGTCCCCCGGCCACGGGGCCTGCCACCATACCCACGCCGAAACAAGCGCTCATGAGCCCGAAGTGGCGAGCCCGATCTTCCCCATCGGTGATGTCGGCGATATAGGCGCCAGCAACCGCACCTGTGGCG')
@@ -288,45 +288,112 @@ def quickchange_parts_pass_3():
 
 
 # TESTS -----------------------------------------------------------------------
-@pytest.mark.parametrize('name,input_sequence,expected_sequence',[
-    ['valid', 'AGCTCTCTGTGGCAAGTCA'],
-    ['spaces', 'AGCTCT CTG  TGGCAA      GTCA'],
-    ['newlines', '\nAGCTCT\nCTG\n\nTGGCAA\n\n\n\n\n\n\nGTCA'],
-    ['dashes', 'AGCTCT-CTG--TGGCAA------GTCA'],
-    ['underscores', 'AGCTCT_CTG__TGGCAA______GTCA'],
-])
-def test_dna_instantiation_pass(name, input_sequence, expected_sequence):
-    """Placeholder"""
-    # Imports
+@pytest.mark.parametrize('name,input_sequence', [
+    ['dna', 'AGCTCTCTGTGGCAAGTCA'],])
+def test_dna__init__(name, input_sequence):
+    """
+    Tests that the DNA instantiation works under circumstances it is expected
+    to be able to handle, and raises an appropriate error under all
+    circumstances that should make it fail.
+    """
     from models import DNA
-    # Tests
+    assert isinstance(DNA(input_sequence), DNA)
+    assert isinstance(DNA(sequence=input_sequence), DNA)
+    assert isinstance(DNA(input_sequence, name), DNA)
+    assert isinstance(DNA(name=name, sequence=input_sequence), DNA)
+    assert isinstance(DNA(sequence=input_sequence, name=name), DNA)
+    return
+
+
+# @pytest.mark.parametrize('name,input_sequence', [
+#     ])
+# def test_annotate(name, input_sequence):
+#     """
+#     Tests that the DNA instantiation works under circumstances it is expected
+#     to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     from models import DNA
+
+
+# @pytest.mark.parametrize('name,input_sequence', [
+#     ])
+# def test_find_cut_sites(name, input_sequence):
+#     """
+#     Tests that the DNA instantiation works under circumstances it is expected
+#     to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     from models import DNA
+
+
+@pytest.mark.parametrize('name,input_sequence,expected_return', [
+    ['forward', 'ATGCTAAGATGGCCTCCCTGTAAATGAAAAGCTAGATGATTTTATGA',[
+        [0, 27, '+'],
+        [8, 23, '+'],
+        [23, 35, '+'],
+        [35, 47, '+'],]]])
+def test_find_orfs(name, input_sequence, expected_return):
+    """
+    Tests that the `find_orfs` method works under circumstances it is expected
+    to be able to handle, and raises an appropriate error under all
+    circumstances that should make it fail.
+    """
+    from models import DNA
     dna = DNA(name=name, sequence=input_sequence)
-    assert dna.sequence == expected_sequence
+    assert dna.find_orfs() == expected_return
+
+
+@pytest.mark.parametrize('name,input_sequence,expected_return', [
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 58],])
+def test_calculate_nn_tm(name, input_sequence, expected_return):
+    """
+    Tests that the DNA calculate nearest neighbor Tm method works under
+    circumstances it is expected to be able to handle, and raises an
+    appropriate error under all circumstances that should make it fail.
+    """
+    from models import DNA
+    assert DNA.calculate_nn_tm(input_sequence) == expected_return
     return
 
 
-@pytest.mark.parametrize('name,input_sequence,outcome',[
-    ['rna', 'AGCUCUCUGUGGCAAGUCA', ],
-    ['false_nucleotide', 'AGCXCUCUGUGGCAAGUCA'],
-    ['protein', 'MATCGGSFDERYKLD',]
-])
-def test_dna_instantiation_fail():
-    """Placeholder"""
+@pytest.mark.parametrize('name,input_sequence,expected_return', [
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 58],])
+def test_calculate_wallace_tm(name, input_sequence, expected_return):
+    """
+    Tests that the DNA calculate wallace Tm method works under circumstances
+    it is expected to be able to handle, and raises an appropriate error under
+    all circumstances that should make it fail.
+    """
+    from models import DNA
+    assert DNA.calculate_wallace_tm(input_sequence) == expected_return
     return
 
 
-@pytest.mark.parametrize(
-    'template,primer,binding_index,mismatch_index',[
-        [test_set[0], test_set[1], test_set[2], test_set[3]],
+@pytest.mark.parametrize('name,input_sequence,expected_return', [
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 57],])
+def test_calculate_gc_tm(name, input_sequence, expected_return):
+    """
+    Tests that the DNA calculate gc Tm method works under circumstances it is
+    expected to be able to handle, and raises an appropriate error under all
+    circumstances that should make it fail.
+    """
+    from models import DNA
+    assert DNA.calculate_gc_tm(input_sequence) == expected_return
+    return
+
+
+@pytest.mark.parametrize('template,primer,binding_index,mismatch_index', [
     ])
 def test_anneal_oligo(template, primer, binding_index, mismatch_index):
-    """Placeholder"""
-    # Imports
-    from models import Construct, Primer
-    
-    # Tests
+    """
+    Tests that the DNA anneal oligo method works under circumstances it is
+    expected to be able to handle, and raises an appropriate error under all
+    circumstances that should make it fail.
+    """
+    from models import DNA, Construct, Primer
     template = Construct(sequence=template)
-    primer = Primer(sequence=primer, template=template)
+    primer = Primer(sequence=primer)
     binding_index, mismatch_index = template.anneal_oligo(primer)
     assert (template.sequence[binding_index[0]:binding_index[1]]
             == primer.sequence)
@@ -336,54 +403,89 @@ def test_anneal_oligo(template, primer, binding_index, mismatch_index):
     return
 
 
-@pytest.mark.parametrize()
-def test_pcr_amplify():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_pcr_amplify(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA pcr amplify method works under circumstances it is
+#     expected to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_design_amplification_primers():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_design_amplification_primers(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA design amplification primers method works under
+#     circumstances it is expected to be able to handle, and raises an
+#     appropriate error under all circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_find_cutters():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_find_cutters(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA find cutters method works under circumstances it is
+#     expected to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_find_golden_gate_cutters():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_find_golden_gate_cutters(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA find golden gate cutters method works under
+#     circumstances it is expected to be able to handle, and raises an
+#     appropriate error under all circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_make_rna():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_make_rna(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA transcribe method works under circumstances it is 
+#     xpected to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_find_orfs():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_find_orfs(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA find orfs method works under circumstances it is 
+#     xpected to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_simulate_agarose_gel():
-    """Placeholder"""
-    return
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_simulate_agarose_gel(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA simulate agarose gel method works under circumstances
+#     it is expected to be able to handle, and raises an appropriate error under
+#     all circumstances that should make it fail.
+#     """
+#     return
 
 
-@pytest.mark.parametrize()
-def test_align():
-    """Placeholder"""
-    return
-
-
-# TEST SCRIPT -----------------------------------------------------------------
-if __name__ == '__main__':
-    print('A test script is not selected')
+# @pytest.mark.parametrize('name,input_sequence,expected_return', [
+#     ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],])
+# def test_align(name, input_sequence, expected_return):
+#     """
+#     Tests that the DNA align method works under circumstances it is expected
+#     to be able to handle, and raises an appropriate error under all
+#     circumstances that should make it fail.
+#     """
+#     return

@@ -256,14 +256,14 @@ def protein():
 @pytest.mark.parametrize('name,input_sequence', [
     ['dna', 'AGCTCTCTGTGGCAAGTCA'],
     ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCN'],
-    ['rna', 'AGCUCTCUGUGGCAAGUCA'],
+    ['rna', 'AGCUCUCUGUGGCAAGUCA'],
     ['spaces', 'AGCTCT CTG  TGGCAA      GTCA'],
     ['newlines', '\nAGCTCT\nCTG\n\nTGGCAA\n\n\n\n\n\n\nGTCA'],
     ['dashes', 'AGCTCT-CTG--TGGCAA------GTCA'],
     ['underscores', 'AGCTCT_CTG__TGGCAA______GTCA'],
     ['whitespace', '      AGCTCTCTGTGGCAAGTCA      '],
     ['lowercase', 'agctctctgtggcaagtca'],])
-def test_nucleotide_instantiation(name, input_sequence):
+def test_nucleotide__init__(name, input_sequence):
     """
     Tests that the nucleotide instantiation works under circumstances
     it is expected to be able to handle, and raises an appropriate error
@@ -275,20 +275,13 @@ def test_nucleotide_instantiation(name, input_sequence):
     assert isinstance(Nucleotide(input_sequence, name), Nucleotide)
     assert isinstance(Nucleotide(name=name, sequence=input_sequence), Nucleotide)
     assert isinstance(Nucleotide(sequence=input_sequence, name=name), Nucleotide)
-    with pytest.raises(AttributeError):
-        Nucleotide(name)
-        Nucleotide(name=name)
-        Nucleotide(name, input_sequence)
-        Nucleotide(input_sequence, name, 'extra_arg')
-        Nucleotide(name=input_sequence, sequence=name)
-        Nucleotide(name=name, sequence=input_sequence, extra_arg='extra_arg')
     return
 
 
 @pytest.mark.parametrize('name,pass_expected,input_sequence,result',[
     ['dna', True, 'AGCTCTCTGTGGCAAGTCA', 'AGCTCTCTGTGGCAAGTCA'],
     ['ambiguous_dna', True, 'RDBWYTSTGHVGMAAKTCN', 'RDBWYTSTGHVGMAAKTCN'],
-    ['rna', True, 'AGCUCTCUGUGGCAAGUCA', 'AGCTCTCTGTGGCAAGTCA'],
+    ['rna', True, 'AGCUCUCUGUGGCAAGUCA', 'AGCUCUCUGUGGCAAGUCA'],
     ['protein', False, 'ARNDCEQGHILKMFPSTWYV', ValueError],
     ['spaces', True, 'AGCTCT CTG  TGGCAA      GTCA', 'AGCTCTCTGTGGCAAGTCA'],
     ['newlines', True, '\nAGCTCT\nCTG\n\nTGGCAA\n\n\n\n\n\n\nGTCA', 'AGCTCTCTGTGGCAAGTCA'],
@@ -314,7 +307,7 @@ def test_sequence_property(name, pass_expected, input_sequence, result):
 @pytest.mark.parametrize('name,input_sequence,result',[
     ['dna', 'AGCTCTCTGTGGCAAGTCA', 19],
     ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 22],
-    ['rna', 'AGCUCTCUGUGGCAAG', 16],
+    ['rna', 'AGCUCUCUGUGGCAAG', 16],
     ['spaces', 'AGCTCT CTG  TGGCAA      GTCA', 19],
     ['newlines', '\nAGCTCT\nCTG\n\nTGGCAA\n\n\n\n\n\n\nGTCA', 19],
     ['dashes', 'AGCTCT-CTG--TGGCAA------GTCA', 19],
@@ -332,15 +325,9 @@ def test_length_property(name, input_sequence, result):
 
 
 @pytest.mark.parametrize('name,input_sequence,result',[
-    ['dna', 'AGCTCTCTGTGGCAAGTCA', 19],
-    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 22],
-    ['rna', 'AGCUCTCUGUGGCAAG', 16],
-    ['spaces', 'AGCTCT CTG  TGGCAA      GTCA', 19],
-    ['newlines', '\nAGCTCT\nCTG\n\nTGGCAA\n\n\n\n\n\n\nGTCA', 19],
-    ['dashes', 'AGCTCT-CTG--TGGCAA------GTCA', 19],
-    ['underscores', 'AGCTCT_CTG__TGGCAA______GTCA', 19],
-    ['whitespace', '      AGCTCTCTGTGGCAAGTCA      ', 19],
-    ['lowercase', 'agctctctgtggcaagtca', 19],])
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 52.63],
+    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 43.18],
+    ['rna', 'AGCUCUCUGUGGCAAG', 56.25],])
 def test_gc_content_property(name, input_sequence, result):
     """
     Tests that the nucleotide gc_content property works under circumstances
@@ -348,4 +335,75 @@ def test_gc_content_property(name, input_sequence, result):
     under all circumstances that should make it fail.
     """
     nucleotide = Nucleotide(name=name, sequence=input_sequence)
-    assert
+    assert nucleotide.gc_content == result
+
+
+@pytest.mark.parametrize('name,input_sequence,result',[
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 'ACTGAACGGTGTCTCTCGA'],
+    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 'TCANCTKAAMGVHGTSTYWBDR'],
+    ['rna', 'AGCUCUCUGUGGCAAG', 'GAACGGUGUCUCUCGA'],])
+def test_reverse_method(name, input_sequence, result):
+    """
+    Tests that the nucleotide `reverse` method works under circumstances
+    it is expected to be able to handle, and raises an appropriate error
+    under all circumstances that should make it fail.
+    """
+    nucleotide = Nucleotide(name=name, sequence=input_sequence)
+    assert nucleotide.reverse() == result
+
+
+@pytest.mark.parametrize('name,input_sequence,result',[
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TCGAGAGACACCGTTCAGT'],
+    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 'YHVWRASACDBCKTTMAGNTGA'],
+    ['rna', 'AGCUCUCUGUGGCAAG', 'UCGAGAGACACCGUUC'],])
+def test_complement_property(name, input_sequence, result):
+    """
+    Tests that the nucleotide `complement` property works under circumstances
+    it is expected to be able to handle, and raises an appropriate error
+    under all circumstances that should make it fail.
+    """
+    nucleotide = Nucleotide(name=name, sequence=input_sequence)
+    assert nucleotide.complement == result
+
+
+@pytest.mark.parametrize('name,input_sequence,result',[
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],
+    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 'AGTNGAMTTKCBDCASARWVHY', ],
+    ['rna', 'AGCUCUCUGUGGCAAG', 'CUUGCCACAGAGAGCU'],])
+def test_reverse_complement_property(name, input_sequence, result):
+    """
+    Tests that the nucleotide `reverse_complement` property works under
+    circumstances it is expected to be able to handle, and raises an
+    appropriate error under all circumstances that should make it fail.
+    """
+    nucleotide = Nucleotide(name=name, sequence=input_sequence)
+    assert nucleotide.reverse_complement == result
+
+
+@pytest.mark.parametrize('name,input_sequence,result',[
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', 'TGACTTGCCACAGAGAGCT'],
+    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', 'AGTNGAMTTKCBDCASARWVHY', ],
+    ['rna', 'AGCUCUCUGUGGCAAG', 'CUUGCCACAGAGAGCU'],])
+def test_flip_sequence_method(name, input_sequence, result):
+    """
+    Tests that the nucleotide `reverse` method works under circumstances
+    it is expected to be able to handle, and raises an appropriate error
+    under all circumstances that should make it fail.
+    """
+    nucleotide = Nucleotide(name=name, sequence=input_sequence)
+    nucleotide.flip_sequence()
+    assert nucleotide.sequence == result
+
+
+@pytest.mark.parametrize('name,input_sequence,result',[
+    ['dna', 'AGCTCTCTGTGGCAAGTCA', False],
+    ['ambiguous_dna', 'RDBWYTSTGHVGMAAKTCNACT', True],
+    ['rna', 'AGCUCUCUGUGGCAAG', False],])
+def test_contains_ambiguity_method(name, input_sequence, result):
+    """
+    Tests that the nucleotide `contains_ambiguity` method works under
+    circumstances it is expected to be able to handle, and raises an
+    appropriate error under all circumstances that should make it fail.
+    """
+    nucleotide = Nucleotide(name=name, sequence=input_sequence)
+    assert nucleotide.contains_ambiguity() == result
