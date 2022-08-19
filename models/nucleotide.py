@@ -9,7 +9,7 @@ Usage Example:
 import pathlib
 import textwrap
 # Global Constants
-GG_EXPRESS_DIR = pathlib.Path(__file__).resolve().parent.parent
+ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 
 # CLASSES ---------------------------------------------------------------------
@@ -49,7 +49,7 @@ class Nucleotide:
 
     @property
     def sequence(self):
-        """Requires docstring"""
+        """Sequence validation"""
         return self._sequence
 
     @sequence.setter
@@ -109,14 +109,13 @@ class Nucleotide:
         gc_count = self.sequence.count('G') + self.sequence.count('C')
         at_count = self.sequence.count('A') + self.sequence.count('T') + self.sequence.count('U')
         if any(char in Nucleotide.ambiguous_bases for char in self.sequence):
-            for ambiguity, chance in Nucleotide.ambiguous_bases.items():
-                ambiguity_count = self.sequence.count(ambiguity)
-                gc_chance = (chance.count('G') + chance.count('C')) / len(chance)
-                gc_count += gc_chance * ambiguity_count
-                at_count += ambiguity_count - gc_chance
+            for ambiguous_base, possibilities in Nucleotide.ambiguous_bases.items():
+                ambiguous_base_count = self.sequence.count(ambiguous_base)
+                gc_chance = (possibilities.count('G') + possibilities.count('C')) / len(possibilities)
+                gc_count += gc_chance * ambiguous_base_count
+                at_count += (1 - gc_chance) * ambiguous_base_count
         percent = round(float(gc_count / (gc_count + at_count) * 100), 2)
         return percent
-
 
     def reverse(self):
         """Return the sequence in the 3' to 5' orientation"""
@@ -186,3 +185,30 @@ class Nucleotide:
         nucleotide character
         """
         return any(char in Nucleotide.ambiguous_bases for char in self.sequence)
+
+    @staticmethod
+    def create_fasta(sequence_objects):
+        """Creates a fasta file including all input DNA sequences"""
+        fasta_list = list()
+        for sequence_object in sequence_objects:
+            fasta_list.append(f'>{sequence_object.name}\n{sequence_object.sequence}\n')
+        fasta_string = ''.join(fasta_list).strip()
+        return fasta_string
+
+    @staticmethod
+    def mafft_align(sequence_objects):
+        """Generates a multiple sequence alignment using mafft and returns
+        the location of the output file"""
+        import subprocess
+        fasta_string = Nucleotide.create_fasta(sequence_objects)
+        sequences_path = ROOT_DIR / 'static' / 'temp' / 'sequences.fasta'
+        with open(sequences_path, mode='w', encoding='utf-8') as sequences_fasta:
+            sequences_fasta.write(fasta_string)
+        alignment_path = ROOT_DIR / 'static' / 'temp' / 'alignment.fasta'
+        alignment_path.touch()
+        subprocess.run(f'mafft --auto --maxiterate 100 --thread 4 {str(sequences_path)} > {str(alignment_path)}', check=True, shell=True)
+        with open(alignment_path, mode='r', encoding='utf-8') as alignment_fasta:
+            alignment_string = alignment_fasta.read()
+        # sequences_path.unlink()
+        # alignment_path.unlink()
+        return alignment_string

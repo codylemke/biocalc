@@ -407,3 +407,29 @@ def test_contains_ambiguity_method(name, input_sequence, result):
     """
     nucleotide = Nucleotide(name=name, sequence=input_sequence)
     assert nucleotide.contains_ambiguity() == result
+
+
+@pytest.mark.parametrize('sequence_objects,expected_return', [
+    [[
+        Nucleotide(name='seq1', sequence='ATCG'),
+        Nucleotide(name='seq2', sequence='TCGA'),
+        Nucleotide(name='seq3', sequence='GCCT')],
+    '>seq1\nATCG\n>seq2\nTCGA\n>seq3\nGCCT'],])
+def test_create_fasta(sequence_objects, expected_return):
+    """Placeholder"""
+    assert Nucleotide.create_fasta(sequence_objects) == expected_return
+    return
+
+
+@pytest.mark.parametrize('sequence_objects,expected_length', [
+    [[
+        Nucleotide(name='seq1', sequence='ATGCCGTAA'),
+        Nucleotide(name='seq2', sequence='ATGTAA'),
+        Nucleotide(name='seq3', sequence='ATGCGTAA')], 9],])
+def test_mafft_align(sequence_objects, expected_length):
+    """Placeholder"""
+    alignment_list = Nucleotide.mafft_align(sequence_objects).splitlines()
+    sequence_list = [item for item in alignment_list if '>' not in item]
+    for sequence in sequence_list:
+        assert len(sequence) == expected_length
+    return

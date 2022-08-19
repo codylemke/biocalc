@@ -197,5 +197,4 @@ class DNA(Nucleotide):
         return # Image
 
 
-    def align(self, *DNAs):
-        return # Alignment
+    
