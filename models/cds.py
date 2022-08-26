@@ -25,3 +25,7 @@ class CDS(Nucleotide):
         self.project = project
         self.cloning_method = cloning_method
         return
+
+    def codon_optimize(self):
+        """Codon optimizes the sequence of the object"""
+        return

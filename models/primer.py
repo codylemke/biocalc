@@ -7,9 +7,10 @@ Usage Example:
 """
 # Standard Libraries
 import pathlib
-import regex
+import subprocess
 import collections
 # Third Party Packages
+import regex
 from Bio.SeqUtils import MeltingTemp
 # Local Modules
 from .dna import DNA
@@ -20,15 +21,14 @@ ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 # CLASS -----------------------------------------------------------------------
 class Primer(DNA):
     """Representation of a primer"""
-    def __init__(
-        self, sequence, name='generic_primer', template='none',
-        direction='universal',  project='Generic', purpose='Unspecified',
-        method='Unspecified', template_index=None):
+    def __init__(self, sequence, name='generic_primer', project='Generic',
+        purpose='Unspecified', method='Unspecified'):
         """Primer constructor function"""
         super().__init__(sequence=sequence, name=name)
         self.purpose = purpose
         self.method = method
         self.project = project
+        return
 
     @property
     def tm(self):
@@ -89,7 +89,6 @@ class Primer(DNA):
     def blast(self, template):
         """Blasts the primer sequence against a template sequence to search for
         binding sites."""
-        import subprocess
         TEMP_DIR = ROOT_DIR / 'static' / 'temp'
         template_fasta = TEMP_DIR / 'template.fasta'
         template_fasta.touch()

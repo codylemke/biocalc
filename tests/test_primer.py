@@ -91,9 +91,6 @@ def test_primer__init__(name, input_sequence):
     assert isinstance(Primer(sequence=input_sequence, name=name), Primer)
     return
 
-@pytest.mark.parametrize('name,input_sequence,template,expected_return', [
-    ['pEV_F', 'CGCAGCGAGTCAGTGAG', pEV, ''],])
-
 # @pytest.mark.parametrize('name,input_sequence,template,expected_return', [
 #     ['amplification_primer', '', pEV, ''],
 #     ['sequencing_primer', 'CGCAGCGAGTCAGTGAG', pEV, ''],

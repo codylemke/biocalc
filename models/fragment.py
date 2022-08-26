@@ -19,7 +19,7 @@ class Fragment(DNA):
         self, sequence, name, purpose=None, method=None, source=None,
         primers=None, project=None):
         """Placeholder"""
-        super().__init__(sequence=sequence, name=name)
+        super().__init__(sequence=sequence, name=name, dna_type='fragment')
         self.purpose = purpose
         self.method = method
         self.source = source
