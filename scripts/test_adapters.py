@@ -114,7 +114,7 @@ def t7_terminator():
     ('t7_terminator', 'GGTTAACCGCAATGAAGACTGATTACTAGCATAACCCCTTGGGGCCTCTAAACGGGTCTTGAGGGGTTTTTTGAATCGTGTCTTCTAACGCCAATTGG'),])
 def test_append_gge_adapters(fixture, expected, request):
     """Placeholder"""
-    from .adapters import append_gge_adapters
+    from .fasta_adapters import append_gge_adapters
     item = request.getfixturevalue(fixture)
     assert append_gge_adapters(item['sequence'], item['organism'], item['module']) == expected
     return

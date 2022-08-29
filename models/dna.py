@@ -6,7 +6,6 @@ Usage Example:
     ...example
 """
 # Standard Libraries
-from inspect import modulesbyfile
 import pathlib
 import re
 import collections
@@ -188,7 +187,8 @@ class DNA(Nucleotide):
             primer_pair = PrimerPair(binding_site_1, binding_site_2)
         elif binding_site_1.strand == '-' and binding_site_2.strand == '+':
             primer_pair = PrimerPair(binding_site_2, binding_site_1)
-        fragment = Fragment(sequence=primer_1.sequence+self.sequence[primer_1_site.])
+        fragment = Fragment(sequence=primer_1.sequence+self.sequence[binding_site_1])
+        # In Development
         return # Fragement
 
     def design_amplification_primers(self, index_1=0, index_2=None, project='generic', left_extension=None, right_extension=None):
@@ -220,7 +220,7 @@ class DNA(Nucleotide):
         def main():
             modules = parse_module(module)
             prepared_sequence = prepare_sequence(modules)
-            sequence = append_adapters(modules, prepared_sequence)
+            sequence = append_gge_adapters(modules, prepared_sequence)
             fragment = Fragment(name=self.name, sequence=sequence)
             return fragment
 
@@ -257,8 +257,8 @@ class DNA(Nucleotide):
                     sequence = sequence[3:]
                 try:
                     sequence = tis[organism]+sequence
-                except KeyError:
-                    raise ValueError('The organism entered is invalid.')
+                except KeyError as err:
+                    raise KeyError('The organism entered is invalid.') from err
             if modules.right == 4:
                 if sequence[-3:] in ['TAA', 'TGA', 'TAG']:
                     sequence = sequence[:-3]
@@ -282,12 +282,12 @@ class DNA(Nucleotide):
                         sequence = sequence+'TAA'
             return sequence
 
-        def append_adapters(modules, sequence):
+        def append_gge_adapters(modules, sequence):
             """Returns the sequence of the portion of the overhang that should be
             appended to the sequence"""
             gge_adapters = {
-                5: 'GGTTAACCGCAATGAAGACTG',
-                3: 'GTGTCTTCTAACGCCAATTGG'}
+                5: 'GCAATGAAGACTG',
+                3: 'GTGTCTTCTAACG'}
             gge_overhangs = {
                 1: {5: 'CCTC', 3: 'CATA'},
                 2: {5: 'CATA', 3: 'AAAA'},
