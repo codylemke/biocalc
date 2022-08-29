@@ -124,6 +124,9 @@ class Sequence:
                         name = header_fields[2].split()[0]
                         organism = re.search(r'(?<=OS\=)(.+)(?=\sOX\=)', header_fields[2])
                         taxid = re.search(r'(?<=OX\=)(.+)(?=\sGN\=)', header_fields[2])
+                        gene_name = re.search(r'(?<=GN\=)(.+)(?=\sPE\=)', header_fields[2])
+                        pe = re.search(r'(?<=PE\=)(.+)(?=\sSV\=)', header_fields[2])
+                        sv = re.search(r'(?<=SV\=)(.+)$', header_fields[2])
                         sequence_object = cls(name=name, sequence=sequence, origin=origin,
                         organism=organism, taxid=taxid)
                     else:
