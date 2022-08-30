@@ -81,8 +81,16 @@ class Sequence:
                 header_fields = header.split('|')
                 if len(header_fields) > 1:
                     header_dict = parse_fasta_header(header_fields)
+                if sequence_type == 'nucleotide':
+                    pass
+                elif sequence_type == 'protein':
+                    pass
+                elif sequence_type is None:
+                    pass
+                else:
+                    raise Exception
             return
-            
+
         def parse_fasta_header(header_fields):
             """Parses the fasta file header for conventional annotations"""
             standard_headers = {
@@ -143,3 +151,12 @@ class Sequence:
             return header_dict
             
         return main()
+
+    @staticmethod
+    def create_fasta(sequence_objects):
+        """Creates a fasta file including all input DNA sequences"""
+        fasta_list = list()
+        for sequence_object in sequence_objects:
+            fasta_list.append(f'>{sequence_object.name}\n{sequence_object.sequence}\n')
+        fasta_string = ''.join(fasta_list).strip()
+        return fasta_string

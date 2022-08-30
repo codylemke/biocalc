@@ -78,29 +78,24 @@ class Protein:
         return
 
     @property
-    def length(self):
-        """Return the number of residues in the sequence"""
-        residues = len(self.sequence)
-        return residues
-
-    @property
     def molecular_weight(self):
-        """Returns the kDa of the protein sequence"""
+        """Returns the molecular weight in kDa of the protein"""
         mws = list()
         for residue in self.sequence:
-            if residue in Protein.ambiguous_residues:
+            if residue in self.ambiguous_residues:
                 ambiguous_mws = list()
-                for possibility in Protein.ambiguous_residues[residue]:
-                    ambiguous_mws.append(Protein.standard_residues[possibility][2])
-                average = sum(ambiguous_mws) / len(Protein.ambiguous_residues[residue])
+                for possibility in self.ambiguous_residues[residue]:
+                    ambiguous_mws.append(self.standard_residues[possibility][2])
+                average = sum(ambiguous_mws) / len(self.ambiguous_residues[residue])
                 mws.append(average)
-            mws.append(Protein.standard_residues[residue][2])
+            mws.append(self.standard_residues[residue][2])
         mw = sum(mws) / self.length
         return mw
 
     def contains_ambiguity(self):
-        """
-        Return 'True' if the sequence contains an ambigous
-        nucleotide character
-        """
-        return any(char in Protein.ambiguous_residues for char in self.sequence)
+        """Return `True` if the sequence contains an ambigous residue"""
+        return any(residue in self.sequence for residue in self.ambiguous_residues)
+    
+    def contains_nonstandard_residue(self):
+        """Return `True` if the sequence contains a nonstandard residue"""
+        return any(residue in self.sequence for residue in self.nonstandard_residues)

@@ -73,7 +73,7 @@ class Nucleotide(Sequence):
 
     @property
     def molecular_weight(self):
-        """Returns the molecular weight based on sequence"""
+        """Returns the molecular weight in g/mol of the sequence"""
         mw = int()
         for standard_base in self.standard_bases:
             if self.nucleotide_type == 'DNA':
@@ -184,29 +184,17 @@ class Nucleotide(Sequence):
         return rev_comp
 
     def contains_ambiguity(self):
-        """
-        Return 'True' if the sequence contains an ambigous
-        nucleotide character
-        """
-        return any(char in self.ambiguous_bases for char in self.sequence)
+        """Return `True` if the sequence contains an ambigous base"""
+        return any(base in self.sequence for base in self.ambiguous_bases)
 
     def contains_nonstandard_base(self):
         """Returns `True` if the sequence contains a nonstandard base"""
-        return any(char in self.nonstandard_bases for char in self.sequence)
+        return any(base in self.sequence for base in self.nonstandard_bases)
 
     def flip_sequence(self):
         """Represents the sequence as the reverse complement"""
         self.sequence = self.reverse_complement
         return
-
-    @staticmethod
-    def create_fasta(sequence_objects):
-        """Creates a fasta file including all input DNA sequences"""
-        fasta_list = list()
-        for sequence_object in sequence_objects:
-            fasta_list.append(f'>{sequence_object.name}\n{sequence_object.sequence}\n')
-        fasta_string = ''.join(fasta_list).strip()
-        return fasta_string
 
     @staticmethod
     def mafft_align(sequence_objects):
