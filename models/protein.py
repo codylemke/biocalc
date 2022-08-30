@@ -16,32 +16,38 @@ class Protein:
     """Representation of a protein"""
 
     standard_residues = {
-        'A': ['Ala', 'Alanine', 89],
-        'R': ['Arg', 'Arginine', 174],
-        'N': ['Asn', 'Asparagine', 132],
-        'D': ['Asp', 'Aspartic acid', 133],
-        'C': ['Cys', 'Cysteine', 121],
-        'E': ['Glu', 'Glutamic acid', 147],
-        'Q': ['Gln', 'Glutamine', 146],
-        'G': ['Gly', 'Glycine', 75],
-        'H': ['His', 'Histidine', 155],
-        'I': ['Ile', 'Isoleucine', 133],
-        'L': ['Leu', 'Leucine', 131],
-        'K': ['Lys', 'Lysine', 146],
-        'M': ['Met', 'Methionine', 149],
-        'F': ['Phe', 'Phenylalanine', 165],
-        'P': ['Pro', 'Proline', 115],
-        'S': ['Ser', 'Serine', 105],
-        'T': ['Thr', 'Threonine', 119],
-        'W': ['Trp', 'Tryptophan', 204],
-        'Y': ['Tyr', 'Tyrosine', 181],
-        'V': ['Val', 'Valine', 117]
-    }
-
+    # MWs obtained from pubchem
+    # residue, abbreviation, name, daltons
+        'A': ['Ala', 'Alanine', 89.09],
+        'R': ['Arg', 'Arginine', 174.20],
+        'N': ['Asn', 'Asparagine', 132.12],
+        'D': ['Asp', 'Aspartic acid', 133.10],
+        'C': ['Cys', 'Cysteine', 121.16],
+        'E': ['Glu', 'Glutamic acid', 147.13],
+        'Q': ['Gln', 'Glutamine', 146.14],
+        'G': ['Gly', 'Glycine', 75.07],
+        'H': ['His', 'Histidine', 155.15],
+        'I': ['Ile', 'Isoleucine', 131.17],
+        'L': ['Leu', 'Leucine', 131.17],
+        'K': ['Lys', 'Lysine', 146.19],
+        'M': ['Met', 'Methionine', 149.21],
+        'F': ['Phe', 'Phenylalanine', 165.19],
+        'P': ['Pro', 'Proline', 115.13],
+        'S': ['Ser', 'Serine', 105.09],
+        'T': ['Thr', 'Threonine', 119.12],
+        'W': ['Trp', 'Tryptophan', 204.22],
+        'Y': ['Tyr', 'Tyrosine', 181.19],
+        'V': ['Val', 'Valine', 117.15],
+        '*': ['Stop', 'Stop', 0]}
+    nonstandard_residues = {
+        'U': ['Sec', 'Selenocysteine', 167.06],
+        'O': ['Pyl', 'Pyrrolysine', 255.31]}
     ambiguous_residues = {
-        'B': ['D', 'N'],
-        'Z': ['E', 'Q']
-    }
+        'B': ['Asx', ['D', 'N'], 132.61],
+        'Z': ['Glx', ['E', 'Q'], 146.64],
+        'J': ['Xle', ['L', 'I'], 131.17],
+        'X': ['Xaa', ['A','R','N','D','C','E','Q','G','H','I','L','K','M','F',
+                      'P','S','T','W','Y','V'], 136.90]}
     
     def __init__(self, sequence, name='generic_protein'):
         self.sequence = sequence

@@ -22,6 +22,7 @@ GG_EXPRESS_DIR = pathlib.Path(__file__).resolve().parent.parent
 # CLASSES ---------------------------------------------------------------------
 class DNA(Nucleotide):
     """Representation of DNA"""
+    
     def __init__(
         self, sequence, name='generic_dna', dna_type='generic'):
         """Constructor Function"""
