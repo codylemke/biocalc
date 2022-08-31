@@ -9,7 +9,6 @@ Usage Example:
 import pathlib
 # Local Modules
 from .nucleotide import Nucleotide
-from .protein import Protein
 # Global Constants
 GG_EXPRESS_DIR = pathlib.Path(__file__).resolve().parent.parent
 

@@ -327,13 +327,18 @@ class DNA(Nucleotide):
         return main()
     
     @classmethod
-    def fasta_gge_adapters(cls, fasta_input, output_name, organism, module):
+    def file_gge_adapters(cls, fasta_input, output_name, organism, module, file_type='fasta'):
         """Placeholder"""
         sequences = cls.parse_fasta(fasta_file=fasta_input, sequence_type='nucleotide')
         fragments = [sequence.generate_gge_fragment(organism=organism, module=module) for sequence in sequences]
-        fasta_output = ROOT_DIR / 'scripts' / 'outputs' / f'{output_name}.fasta'
-        fasta_output.touch()
-        with fasta_output.open(mode='w') as file:
-            file.write(cls.create_fasta(fragments))
+        if file_type == 'fasta':
+            output_string = cls.create_fasta(fragments)
+            output_file = ROOT_DIR / 'scripts' / 'outputs' / f'{output_name}.fasta'
+        elif file_type == 'csv':
+            output_string = cls.create_csv(fragments)
+            output_file = ROOT_DIR / 'scripts' / 'outputs' / f'{output_name}.csv'
+        output_file.touch()
+        with output_file.open(mode='w') as file:
+            file.write(output_string)
         return
         

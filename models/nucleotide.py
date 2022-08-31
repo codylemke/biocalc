@@ -40,9 +40,10 @@ class Nucleotide(Sequence):
         'N': ['A', 'C', 'G', 'T', 'U']} # any nucleotide
 
     # def __new__(cls, *args, **kwargs):
-    #     """Figure out how to auto generate names"""
+    #     """Figure out how to create the right object regardless of what the user selects"""
     #     instance = super().__new__(cls)
     #     return instance
+    # recursion can be used when saving inherited models to the DB
 
     def __init__(self, sequence, name='generic_nucleotide', strands=None,
                  nucleotide_type=None, orientation='linear'):

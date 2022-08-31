@@ -178,3 +178,23 @@ class Sequence:
             fasta_list.append(f'>{sequence_object.name}\n{sequence_object.sequence}\n')
         fasta_string = ''.join(fasta_list).strip()
         return fasta_string
+
+    @staticmethod
+    def create_csv(sequence_objects):
+        """Creates a fasta file including all input DNA sequences"""
+        csv_list = list()
+        for sequence_object in sequence_objects:
+            csv_list.append(f'{sequence_object.name},{sequence_object.sequence}\n')
+        csv_string = ''.join(csv_list).strip()
+        return csv_string
+
+    @classmethod
+    def fasta_to_csv(cls, fasta_file, sequence_type, output_name):
+        """Creates a csv file for sequences from a fasta file"""
+        sequences = cls.parse_fasta(fasta_file, sequence_type)
+        csv_string = cls.create_csv(sequences)
+        output_file = ROOT_DIR / 'scripts' / 'outputs' / f'{output_name}.csv'
+        output_file.touch()
+        with output_file.open(mode='w') as file:
+            file.write(csv_string)
+        return
