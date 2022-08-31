@@ -6,11 +6,14 @@ Usage Example:
     example...
 """
 # Local Modules
-from .dna import DNA
-from .nucleotide import Nucleotide
-from .primer import Primer
-from .fragment import Fragment
-from .construct import Construct
-from .protein import Protein
 from .cds import CDS
+from .construct import Construct
+from .dna import DNA
+from .fragment import Fragment
+from .nucleotide import Nucleotide
+from .orf import ORF
+from .pcr_reaction import PCRReaction
+from .primer import Primer
+from .protein import Protein
 from .rna import RNA
+from .sequence import Sequence

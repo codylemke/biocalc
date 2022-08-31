@@ -15,6 +15,19 @@ ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 # CLASSES ---------------------------------------------------------------------
 class Sequence:
     """Representation of a biological sequence"""
+    
+    # def __new__(cls, *args, **kwargs):
+    #     """Placeholder"""
+    #     if kwargs.get('sequence_type') == 'protein':
+    #         from .protein import Protein
+    #         obj = Protein()
+    #     elif kwargs.get('sequence_type') == 'nucleotide':
+    #         from .nucleotide import Nucleotide
+    #         obj = Nucleotide()
+    #     else:
+    #         obj = super().__new__(cls)
+    #         return obj
+    
     def __init__(self, sequence, name='generic_sequence', sequence_type=None,
                  source=None, accession=None, accession_db=None,
                  accession_index=None):
@@ -73,23 +86,27 @@ class Sequence:
             sequence_objects = list()
             with fasta_file.open(mode='r') as file:
                 fasta_contents = file.read()
-            fasta_entries = fasta_contents.split('>')
+            fasta_entries = fasta_contents.split('>')[1:]
             for entry in fasta_entries:
                 lines = entry.split('\n')
                 header = lines[0]
                 sequence = ''.join(lines[1:]).strip()
-                header_fields = header.split('|')
-                if len(header_fields) > 1:
-                    header_dict = parse_fasta_header(header_fields)
+                # header_fields = header.split('|')
+                # if len(header_fields) > 1:
+                #     header_dict = parse_fasta_header(header_fields)
+                #     name = header_dict['name']
+                # else:
+                name = header
                 if sequence_type == 'nucleotide':
-                    pass
+                    sequence_object = cls(name=name, sequence=sequence)
                 elif sequence_type == 'protein':
-                    pass
+                    sequence_object = cls(name=name, sequence=sequence)
                 elif sequence_type is None:
-                    pass
+                    sequence_object = cls(name=name, sequence=sequence)
                 else:
                     raise Exception
-            return
+                sequence_objects.append(sequence_object)
+            return sequence_objects
 
         def parse_fasta_header(header_fields):
             """Parses the fasta file header for conventional annotations"""
@@ -102,7 +119,7 @@ class Sequence:
                 'gb': ['GenBank', ['accession', 'locus']],
                 'emb': ['EMBL', ['accession', 'locus']],
                 'pir': ['PIR', ['accession', 'locus']],
-                'sp': ['SWISS-PROT', ['accession', 'locus']],
+                'sp': ['SWISS-PROT', ['accession', 'name']],
                 'pat': ['patent', ['country', 'patent', 'sequence_number']],
                 'pgp': ['pre-grant patent', ['country', 'application_number', 'sequence_number']],
                 'ref': ['RefSeq', ['accession', 'name']],
@@ -114,7 +131,8 @@ class Sequence:
                 'tpg': ['third-party GenBank', ['accession', 'name']],
                 'tpe': ['third-party EMBL', ['acccession', 'name']],
                 'tpd': ['third-party DDBJ', ['accession', 'name']],
-                'tr': ['TrEMBL', ['accession', 'name']]}
+                'tr': ['TrEMBL', ['accession', 'name']],
+                'ENA': ['EBI', ['accession', 'name']]}
             header_dict = dict()
             try:
                 fasta_format = standard_headers[header_fields[0]]

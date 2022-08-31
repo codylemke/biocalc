@@ -44,40 +44,58 @@ class Nucleotide(Sequence):
     #     instance = super().__new__(cls)
     #     return instance
 
-    def __init__(self, sequence, name='generic_nucleotide', nucleotide_type='generic'):
-        super().__init__(sequence=sequence, name=name, nucleotide_type='dna')
-        self.name = name
+    def __init__(self, sequence, name='generic_nucleotide', strands=None,
+                 nucleotide_type=None, orientation='linear'):
         self.nucleotide_type = nucleotide_type
+        super().__init__(sequence=sequence, name=name, sequence_type='dna')
+        self.name = name
         self.sequence = sequence
+        self.orientation = orientation
+        if strands is None:
+            if self.nucleotide_type == 'DNA':
+                self.strands = 'double'
+            elif self.nucleotide_type == 'RNA':
+                self.strands = 'single'
+        else:
+            self.strands = strands
         return
 
-    if 'U' in seq and 'T' not in seq:
+    @property
+    def sequence(self):
+        """Placeholder"""
+        return Sequence.sequence.fget(self)
+
+    @sequence.setter
+    def sequence(self, seq):
+        """Placeholder"""
+        Sequence.sequence.fset(self, seq)
+        if self.nucleotide_type is None:
+            if 'U' in self.sequence and 'T' not in self.sequence:
                 self.nucleotide_type = 'RNA'
-            elif 'T' in seq and 'U' not in seq:
+            elif 'T' in self.sequence and 'U' not in self.sequence:
                 self.nucleotide_type = 'DNA'
             else:
-                raise AttributeError(textwrap.dedent("""\
-                    The `nucleotide_type` could not be determined.
-                    Please manually specify the `nucleotide_type` as a keyword argument.
-                    eg. DNA or RNA"""))
-            elif self.nucleotide_type == 'DNA':
-                if 'U' in seq and 'T' not in seq:
-                    raise AttributeError(
-                        'The `nucleotide_type` attribute was '
-                        'specified as DNA but appears to be RNA')
-            elif self.nucleotide_type == 'RNA':
-                if 'T' in seq and 'U' not in seq:
-                    raise AttributeError(
-                        'The `nucleotide_type` attribute was '
-                        'specified as RNA but appears to be DNA')
+                raise AttributeError(
+                    'The `nucleotide_type` could not be determined')
+        elif self.nucleotide_type == 'DNA':
+            if 'U' in self.sequence and 'T' not in self.sequence:
+                raise AttributeError(
+                    'The `nucleotide_type` attribute was '
+                    'specified as DNA but appears to be RNA')
+        elif self.nucleotide_type == 'RNA':
+            if 'T' in self.sequence and 'U' not in self.sequence:
+                raise AttributeError(
+                    'The `nucleotide_type` attribute was '
+                    'specified as RNA but appears to be DNA')
+        return
 
     @property
     def molecular_weight(self):
         """Returns the molecular weight in g/mol of the sequence"""
         mw = int()
-        for standard_base in self.standard_bases:
+        for standard_base, base_details in self.standard_bases.items():
             if self.nucleotide_type == 'DNA':
-                mw += (self.standard_bases[standard_base][2] - 34) * self.sequence.count(standard_base)
+                mw += (base_details[2] - 34) * self.sequence.count(standard_base)
                 if self.orientation == 'linear':
                     mw += 79
                 elif self.orientation == 'circular':
@@ -85,7 +103,7 @@ class Nucleotide(Sequence):
                 else:
                     pass
             elif self.nucleotide_type == 'RNA':
-                mw += (self.standard_bases[standard_base][2] - 18) * self.sequence.count(standard_base)
+                mw += (base_details[2] - 18) * self.sequence.count(standard_base)
                 if self.orientation == 'linear':
                     mw += 159
                 elif self.orientation == 'circular':
@@ -96,14 +114,14 @@ class Nucleotide(Sequence):
                 pass
         if not all(char in self.standard_bases for char in self.sequence):
             if self.contains_nonstandard_base():
-                for nonstandard_base in self.nonstandard_bases:
+                for nonstandard_base, base_details in self.nonstandard_bases.items():
                     if self.nucleotide_type == 'DNA':
-                        mw += (self.nonstandard_bases[nonstandard_base][2] - 34) * self.sequence.count(nonstandard_base)
+                        mw += (base_details[2] - 34) * self.sequence.count(nonstandard_base)
                     elif self.nucleotide_type == 'RNA':
-                        mw += (self.nonstandard_bases[nonstandard_base][2] - 18) * self.sequence.count(nonstandard_base)
+                        mw += (base_details[2] - 18) * self.sequence.count(nonstandard_base)
             if self.contains_ambiguity():
-                for ambiguous_base in self.ambiguous_bases:
-                    average_mw = sum(self.standard_bases[possible_base][2] for possible_base in self.ambiguous_bases[ambiguous_base]) / self.length
+                for ambiguous_base, possible_bases in self.ambiguous_bases.items():
+                    average_mw = sum(self.standard_bases[possible_base][2] for possible_base in possible_bases) / self.length
                     mw += average_mw * self.sequence.count(ambiguous_base)
         if self.strands == 'double':
             mw *= 2

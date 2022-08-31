@@ -14,9 +14,8 @@ import numpy as np
 from Bio.SeqUtils import MeltingTemp
 # Local Modules
 from .nucleotide import Nucleotide
-from .protein import Protein
 # Global Constants
-GG_EXPRESS_DIR = pathlib.Path(__file__).resolve().parent.parent
+ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 
 
 # CLASSES ---------------------------------------------------------------------
@@ -24,9 +23,10 @@ class DNA(Nucleotide):
     """Representation of DNA"""
     
     def __init__(
-        self, sequence, name='generic_dna', dna_type='generic'):
+        self, sequence, name='generic_dna', strands='double', orientation='linear', dna_type=None):
         """Constructor Function"""
-        super().__init__(sequence=sequence, name=name, nucleotide_type='dna')
+        super().__init__(sequence=sequence, name=name, nucleotide_type='DNA',
+        strands=strands, orientation=orientation)
         self.dna_type = dna_type
         return
 
@@ -138,7 +138,7 @@ class DNA(Nucleotide):
         try:
             binding_sites = [index.start() for index in re.finditer(primer.sequence[-three_prime_seed_length:], self.sequence)]
         except ValueError as err:
-            err('Annealing site not found on template sequence.')
+            raise ValueError('Annealing site not found on template sequence.') from err
         else:
             for binding_site in binding_sites:
                 binding_index = [binding_site, binding_site + three_prime_seed_length]
@@ -325,3 +325,15 @@ class DNA(Nucleotide):
             return gge_adapters[5]+left_overhang+sequence+right_overhang+gge_adapters[3]
 
         return main()
+    
+    @classmethod
+    def fasta_gge_adapters(cls, fasta_input, output_name, organism, module):
+        """Placeholder"""
+        sequences = cls.parse_fasta(fasta_file=fasta_input, sequence_type='nucleotide')
+        fragments = [sequence.generate_gge_fragment(organism=organism, module=module) for sequence in sequences]
+        fasta_output = ROOT_DIR / 'scripts' / 'outputs' / f'{output_name}.fasta'
+        fasta_output.touch()
+        with fasta_output.open(mode='w') as file:
+            file.write(cls.create_fasta(fragments))
+        return
+        

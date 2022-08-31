@@ -17,7 +17,7 @@ class Fragment(DNA):
 
     def __init__(
         self, sequence, name, purpose=None, method=None, source=None,
-        primers=None, project=None):
+        primers=None, project=None, fragment_type=None):
         """Placeholder"""
         super().__init__(sequence=sequence, name=name, dna_type='fragment')
         self.purpose = purpose
@@ -25,6 +25,7 @@ class Fragment(DNA):
         self.source = source
         self.primers = primers
         self.project = project
+        self.fragment_type = fragment_type
 
     def ligate(self, *fragments):
         return # DNA
