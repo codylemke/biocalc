@@ -1,0 +1,17 @@
+"""
+PACKAGE: Contains algorithms for automated primer design
+
+Modules:
+    kld_primer_design
+    overlapping_primer_design
+"""
+from amplification_primer_design import design_amplification_primers
+from cpec_primer_design import design_cpec_primers
+from end_to_end_primer_design import design_end_to_end_primers
+from gibson_primer_design import design_gibson_primers
+from golden_gate_primer_design import design_golden_gate_primers
+from golden_mutagenesis_primer_design import design_golden_mutagenesis_primers
+from hifi_primer_design import design_hifi_primers
+from overlapping_primer_design import design_overlapping_primers
+from sequencing_primer_design import design_sequencing_primers
+

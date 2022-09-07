@@ -17,7 +17,8 @@ class Sequence:
     """Representation of a biological sequence"""
     
     # def __new__(cls, *args, **kwargs):
-    #     """Placeholder"""
+    #     """Returns children object instead of Sequence object depending on
+    #       the nature of the sequence"""
     #     if kwargs.get('sequence_type') == 'protein':
     #         from .protein import Protein
     #         obj = Protein()
@@ -197,4 +198,51 @@ class Sequence:
         output_file.touch()
         with output_file.open(mode='w') as file:
             file.write(csv_string)
+        return
+
+    @staticmethod
+    def align_sequences(sequence_objects, algorithm):
+        """Generates a multiple sequence alignment using mafft and returns
+        the location of the output file"""
+        import subprocess
+        if all (sequence.sequence_type == 'nucleotide' for sequence in sequence_objects):
+            alignment_type = 'nucleotide'
+        elif all (sequence.sequence_type == 'protein' for sequence in sequence_objects):
+            alignmetn_type = 'protein'
+        else:
+            raise ValueError('Not all input sequences are of the same type')
+            
+        fasta_string = Sequence.create_fasta(sequence_objects)
+        sequences_path = ROOT_DIR / 'static' / 'temp' / 'sequences.fasta'
+        with open(sequences_path, mode='w', encoding='utf-8') as sequences_fasta:
+            sequences_fasta.write(fasta_string)
+        alignment_path = ROOT_DIR / 'static' / 'temp' / 'alignment.fasta'
+        alignment_path.touch()
+        subprocess.run(f'mafft --auto --maxiterate 100 --thread 4 {str(sequences_path)} > {str(alignment_path)}', check=True, shell=True)
+        with open(alignment_path, mode='r', encoding='utf-8') as alignment_fasta:
+            alignment_string = alignment_fasta.read()
+        # sequences_path.unlink()
+        # alignment_path.unlink()
+        return alignment_string
+
+    @staticmethod
+    def clustalo_align(sequence_objects):
+        """Placeholder"""
+        return
+
+    @staticmethod
+    def muscle_align(sequence_objects):
+        """Placeholder"""
+        return
+
+    @staticmethod
+    def build_fasttree(fasta_alignment):
+        """Generates a phylogenetic tree using fasttree from a multiple
+        sequence alignment in fasta format"""
+        return
+
+    @staticmethod
+    def fasta_to_tree(fasta_file):
+        """Returns a phylogenetic tree from a fasta file containing multiple
+        sequences."""
         return

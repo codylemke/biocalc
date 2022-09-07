@@ -9,6 +9,7 @@ Usage Example:
 import pathlib
 import re
 import collections
+import dataclasses
 # Third Party Packages
 import numpy as np
 from Bio.SeqUtils import MeltingTemp
@@ -192,11 +193,72 @@ class DNA(Nucleotide):
         # In Development
         return # Fragement
 
-    def design_amplification_primers(self, index_1=0, index_2=None, project='generic', left_extension=None, right_extension=None):
-        """Returns a pair of primer objects dependent on the input indices for
-        amplification"""
-        Constraints = collections.namedtuple('Constraints', [])
-        return # (f_primner, r_primer)
+    def design_primers(self, primer_type, index_1=0, index_2=None, min_len=None, opt_len=None, max_len=None, min_tm=None, opt_tm=None, max_tm=None,
+        min_tm2=None, opt_tm2=None, max_tm2=None, min_gc=None, opt_gc=None, max_gc=None, max_self_anneal=None, min_5_len=None, opt_5_len=None, max_5_len=None,
+        min_3_len=None, opt_3_len=None, max_3_len=None, min_5_tm=None, opt_5_tm=None, max_5_tm=None, min_3_tm=None, opt_3_tm=None, max_3_tm=None):
+        """Placeholder"""
+        
+        @dataclasses.dataclass
+        class PrimerConstraints:
+            min_len: int = dataclasses.field(default=None)
+            opt_len: int = dataclasses.field(default=None)
+            max_len: int = dataclasses.field(default=None)
+            min_tm: int = dataclasses.field(default=None)
+            opt_tm: int = dataclasses.field(default=None)
+            max_tm: int = dataclasses.field(default=None)
+            min_tm2: int = dataclasses.field(default=None)
+            opt_tm2: int = dataclasses.field(default=None)
+            max_tm2: int = dataclasses.field(default=None)
+            min_gc: int = dataclasses.field(default=None)
+            opt_gc: int = dataclasses.field(default=None)
+            max_gc: int = dataclasses.field(default=None)
+            max_self_anneal: int = dataclasses.field(default=None)
+            min_5_len: int = dataclasses.field(default=None)
+            opt_5_len: int = dataclasses.field(default=None)
+            max_5_len: int = dataclasses.field(default=None)
+            min_3_len: int = dataclasses.field(default=None)
+            opt_3_len: int = dataclasses.field(default=None)
+            max_3_len: int = dataclasses.field(default=None)
+            min_5_tm: int = dataclasses.field(default=None)
+            opt_5_tm: int = dataclasses.field(default=None)
+            max_5_tm: int = dataclasses.field(default=None)
+            min_3_tm: int = dataclasses.field(default=None)
+            opt_3_tm: int = dataclasses.field(default=None)
+            max_3_tm: int = dataclasses.field(default=None)
+
+        def main():
+            constraints = PrimerConstraints(
+                min_len, opt_len, max_len, min_tm, opt_tm, max_tm, min_tm2, opt_tm2, max_tm2,
+                min_gc, opt_gc, max_gc, max_self_anneal, min_5_len, opt_5_len, max_5_len,
+                min_3_len, opt_3_len, max_3_len, min_5_tm, opt_5_tm, max_5_tm,
+                min_3_tm, opt_3_tm, max_3_tm)
+            if primer_type == 'amplification':
+                primers = design_amplification_primers(index_1, index_2, constraints)
+                pass
+            elif primer_type == 'mutagenesis':
+                # Make sure the sequence passed in is a CDS
+                # return design_mutagenesis_primers()
+                pass
+            elif primer_type == 'golden_gate':
+                # return design_golden_gate_primers()
+                pass
+            elif primer_type in ['gibson', 'HiFi', 'infusion', 'CPEC']:
+                # return design_assembly_primers()
+                pass
+            elif primer_type == 'sequencing':
+                # return design_sequencing_primers()
+                pass
+            elif primer_type == 'golden_gate_express':
+                pass
+            return # primer_pair
+    
+        def design_amplification_primers(self, index_1=0, index_2=None, project='generic', left_extension=None, right_extension=None):
+            """Returns a pair of primer objects dependent on the input indices for
+            amplification"""
+            Constraints = collections.namedtuple('Constraints', [])
+            return # (f_primner, r_primer)
+
+        return main()
 
     def find_golden_gate_overhangs(self, overhangs):
         """Returns tuples of the index an overhang was found and the overhang

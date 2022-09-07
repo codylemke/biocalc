@@ -215,20 +215,3 @@ class Nucleotide(Sequence):
         self.sequence = self.reverse_complement
         return
 
-    @staticmethod
-    def mafft_align(sequence_objects):
-        """Generates a multiple sequence alignment using mafft and returns
-        the location of the output file"""
-        import subprocess
-        fasta_string = Nucleotide.create_fasta(sequence_objects)
-        sequences_path = ROOT_DIR / 'static' / 'temp' / 'sequences.fasta'
-        with open(sequences_path, mode='w', encoding='utf-8') as sequences_fasta:
-            sequences_fasta.write(fasta_string)
-        alignment_path = ROOT_DIR / 'static' / 'temp' / 'alignment.fasta'
-        alignment_path.touch()
-        subprocess.run(f'mafft --auto --maxiterate 100 --thread 4 {str(sequences_path)} > {str(alignment_path)}', check=True, shell=True)
-        with open(alignment_path, mode='r', encoding='utf-8') as alignment_fasta:
-            alignment_string = alignment_fasta.read()
-        # sequences_path.unlink()
-        # alignment_path.unlink()
-        return alignment_string
